@@ -5,9 +5,11 @@ const CustomButton = ({
   children,
   IsgoogleSignIn,
   IsfbSignIn,
+  onclick,
   ...otherProps
 }) => (
   <button
+    onClick={onclick}
     className={`btn btn-primary ${(IsgoogleSignIn && "custom-btn-google") ||
       (IsfbSignIn && "custom-btn-fb")}`}
   >

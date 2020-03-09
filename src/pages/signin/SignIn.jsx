@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input";
 import CustomButton from "../../components/custom-button/custom-button";
-import { signInWithGoogle } from "./../../firebase/firebase.util";
+
+import { auth, signInWithGoogle } from "../../firebase/firebase.util";
 
 import "./SignIn.scss";
 
@@ -11,9 +12,15 @@ class SignIn extends Component {
     email: "",
     password: ""
   };
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   handleChnage = e => {
     const { value, name } = e.target;
@@ -31,7 +38,7 @@ class SignIn extends Component {
                   <CustomButton IsfbSignIn>Facebook</CustomButton>
                 </div>
                 <div className="google-login-btn">
-                  <CustomButton IsgoogleSignIn onClick={signInWithGoogle}>
+                  <CustomButton IsgoogleSignIn onclick={signInWithGoogle}>
                     Googel
                   </CustomButton>
                 </div>

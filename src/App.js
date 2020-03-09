@@ -49,9 +49,10 @@ class App extends Component {
   }
   render() {
     const { classes } = this.props;
+    const { currentUser } = this.state;
     return (
       <Fragment>
-        <NavigationBar />
+        <NavigationBar currentUser={currentUser} />
         <Grid container className={classes.padding}>
           <Switch>
             <Route exact path="/" component={HomePage} />
