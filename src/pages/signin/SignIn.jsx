@@ -35,10 +35,13 @@ class SignIn extends Component {
               <h2>User Login</h2>
               <div className="social-login-wrapper">
                 <div className="fb-login-btn">
-                  <CustomButton IsfbSignIn>Facebook</CustomButton>
+                  <CustomButton classname="IsfbSignIn">Facebook</CustomButton>
                 </div>
                 <div className="google-login-btn">
-                  <CustomButton IsgoogleSignIn onclick={signInWithGoogle}>
+                  <CustomButton
+                    classname="IsgoogleSignIn"
+                    onclick={signInWithGoogle}
+                  >
                     Googel
                   </CustomButton>
                 </div>

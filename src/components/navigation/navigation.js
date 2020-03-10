@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.util";
 
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropDown from "../cart-dropdown/CartDropDown";
 
 import { makeStyles } from "@material-ui/core/styles";
 import "./navigation.scss";
@@ -60,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-const NavigationBar = ({ currentUser }) => {
+const NavigationBar = ({ currentUser, hidden }) => {
   const classes = useStyles();
   return (
     <div className="nav-wrapper">
@@ -112,15 +113,16 @@ const NavigationBar = ({ currentUser }) => {
               <Link to="/login"> Login</Link>
             )}
           </Button>
-          <Button color="primary" variant="outlined" className={classes.link}>
-            <ShoppingCartIcon />
-          </Button>
+
+          <CartIcon />
         </Toolbar>
       </AppBar>
+      {hidden ? null : <CartDropDown />}
     </div>
   );
 };
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
 });
 export default connect(mapStateToProps)(NavigationBar);
