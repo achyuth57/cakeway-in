@@ -3,8 +3,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.util";
+
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-export default function NavigationBar({ currentUser }) {
+const NavigationBar = ({ currentUser }) => {
   const classes = useStyles();
   return (
     <div className="nav-wrapper">
@@ -117,4 +119,8 @@ export default function NavigationBar({ currentUser }) {
       </AppBar>
     </div>
   );
-}
+};
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+export default connect(mapStateToProps)(NavigationBar);
